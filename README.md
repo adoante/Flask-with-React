@@ -5,10 +5,10 @@ The plan is to have a database and abstract the qai-hub api when uploading your 
 
 ---
 
+### *READ NOTES FIRST*.
+
 Follow the [1] link for the most part but ignore sections 3.2 and 5.2 instead
 look at the [2] link. Also use the [3] link for the SQLAlchemy stuff.
-
-### *READ NOTES FIRST*.
 
 1. Setting up Flask, SQLAlchemy and React
 	- https://medium.com/@mlmason11/building-a-web-application-with-flask-sqlalchemy-and-react-a-comprehensive-guide-1b40ce803ca8 [1]
