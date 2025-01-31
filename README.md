@@ -1,10 +1,9 @@
 ### Preface
 You know I guess you could just have python, pip, flask, flask-cors, node.js and npm/npx installed and just go from there.
 
-<br>
-
 The plan is to have a database and abstract the qai-hub api when uploading your own datasets and submitting compile/inference/etc. jobs which is why I used Anaconda.
 
+---
 
 Follow the [1] link for the most part but ignore sections 3.2 and 5.2 instead
 look at the [2] link. Also use the [3] link for the SQLAlchemy stuff.
