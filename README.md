@@ -1,63 +1,170 @@
-### Preface
-You know I guess you could just have python, pip, flask, flask-cors, SQLAlchemy,
-flask-migrate, node.js and npm/npx installed and just go from there.
+## Instructions
 
-The plan is to have a database and abstract the qai-hub api when uploading your own datasets and submitting compile/inference/etc. jobs which is why I used Anaconda.
+Step by step instructions on cloning and setting up this project.
 
----
+### Clone GitHub Repo
 
-### *READ NOTES FIRST*.
+```bash
+git clone https://github.com/adoante/Flask-with-React.git
+```
 
-Follow the [1] link for the most part but ignore sections 3.2 and 5.2 instead
-look at the [2] link. Also use the [3] link for the SQLAlchemy stuff.
+### Setting up conda environment
 
-### *READ NOTES FIRST*.
+#### *Install conda*
 
-1. Setting up Flask, SQLAlchemy and React
-	- https://medium.com/@mlmason11/building-a-web-application-with-flask-sqlalchemy-and-react-a-comprehensive-guide-1b40ce803ca8 [1]
-	- https://bobbyhadz.com/blog/react-fetch-data-on-button-click [2]
-	- https://www.geeksforgeeks.org/connect-flask-to-a-database-with-flask-sqlalchemy/ [3]
+I recommend and use miniconda. A minimal installer for Conda, a package manager
+and environment manager. Please follow Conda's install instructions.
 
-2. Used miniconda to create Python environment
-	- install
-		- conda
-			- https://anaconda.org/conda-forge/nodejs
-		- pip
-			- Flask
-			- SQLAlchemy 
-			- flask-cors
-			- flask-migrate
-			- sqlalchemy_serializer
-	- Don't install
-		- pip
-			- flask-bcrypt
-	- Useful conda environment docs
-		- https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+- [Miniconda Install](https://docs.anaconda.com/miniconda/)
 
-3. Handling forms as input for post requests
-	- https://medium.com/@umerfarooq.dev/mastering-react-forms-a-deep-dive-into-formdata-and-best-practices-7defecf45ad4
-	- https://upmostly.com/tutorials/how-to-post-requests-react
-	- Follow [3] for an example on using python `requests` and the database
+#### *Create the envornment*
 
-4. SQLAlchemy docs
-	- https://docs.sqlalchemy.org/en/14/orm/query.html#sqlalchemy.orm.Query.get
+Located in the project files is a `environment.yml` file. This file
+contains all dependencies and allows you to create an enviornment
+with them all.
 
-Notes
-- Use `npx create-react-app client`  and you might need to use 
-  `npm i web-vitals --save-dev` to resolve webpack compile errors
-- Run app.py (flask app) using `flask run` or else you'll get a 404 error on all 
-  the endpoints
-- A conda `environment.yml` is provided use `conda env create -f environment.yml`
-  to duplicate environment
-- ~~Only the `App.js` and `app.py` are provided b/c `App.js` does not call the
-  database and `app.js` does not implement SQLAlchemy at this time~~
-- ~~Just create your react app as shown above, copy and paste the provided `App.js`
-  and run `app.py` as shown above then run React using `npm start` while in the
-  `client` directory.~~
-- MAKE SURE TO UPDATE React's `package.json` with  `"proxy": "http://localhost:5000/",`
-  PLACE IT UNDER `"private: "`
-- UPDATE: `models.py` is now provided. Follow the steps in [1] for the initialization.
-  The frontend can now check if the backend is working, add a user through a form
-  submit and get a user through a form submit with the user id.
+First open the miniconda prompt/terminal, navigate to the git directory and use
+the following command.
 
-![frontend](Screenshot%202025-02-01%20115133.png)
+```bash
+conda env create -f environment.yml
+```
+
+Now activate the environment using the following command
+
+```bash
+conda activate flask-react-sqlalchemy-qai-hub
+```
+
+### Setting up the backend
+
+This project uses Flask and SQLalchemy to create an API that accesses and updates a sql database.
+
+Navigate to the `/server` folder. Here you will find two files, `app.py` and `models.py`. `app.py` is our Flask app the API that defines our endpoints and functions. `models.py` is used to initialize our database and define our SQL models.
+
+#### *Initializing the database*
+
+Using the minicoda terminal type the following commands in order.
+
+```bash
+flask db init
+```
+
+```bash
+flask db migrate -m "Initial migration"
+```
+
+
+```bash
+flask db upgrade
+```
+
+NOTE: Each time the database models change, repeat the migrate and upgrade commands.
+
+If you would like to learn more about these command I recommend reading the
+[Flask-Migrate Docs](https://flask-migrate.readthedocs.io/en/latest/index.html).
+
+#### *Start up the backend*
+
+Simply run the following command.
+
+```bash
+flask run
+```
+
+🎉 Congradulations! 🎉 Your backend should be up and running!
+
+Check your terminal for HTTP link or follow this link http://127.0.0.1:5000/. The sever should be running on `localhost` on port `5000`. The port number is defined in the `app.py` file and can be changed.
+
+#### *Testing the backend*
+
+You should be able to see the text "Hello World!" in your browser. Which means
+that flask is running and our `/` endpoint works as well.
+
+Now lets test the endpoint `/api/test`. This endpoint simply returns the
+follwoing JSON
+
+```JSON
+{
+  "message": "Hello from the backend!"
+}
+```
+
+In your browsers address bar type http://127.0.0.1:5000/api/test. You can also
+just click on the link.
+
+### Setting up the frontend
+
+This project uses React.js as the frontend. A `app.js` is provided in the
+project files which calls a few of the endpoints in our `app.py` file.
+
+#### *Creating our React app*
+
+First navigate back to the root of our project directory. We'll create a React app using the following command.
+
+The command will create a folder, `/client` that has everything
+we need for a React app project.
+
+```bash
+npx create-react-app client
+```
+
+# TO DO: FIX WHATEVER ACTUALLY CAUSES THIS
+
+#### *Fixing webpack compile errors*
+
+```bash
+npm i web-vitals --save-dev
+```
+
+#### *Setup communication with our API*
+
+To actually call our API endpoints within our
+React app project we first need to configure a 
+proxy to our backend.
+
+Open the `package.json` file in the `/client/src/` directory.
+
+After `"private":true` and before `"dependencies": {}` type the following line: `"proxy": "http://localhost:5000/",`
+
+#### *Customizing our frontend index page*
+
+In the `/client/src/` directory there is a file names `app.js`. I have provided
+a custom `app.js` file that tests a few of our endpoints.
+
+Simply copy and past the contents into the file.
+
+#### *Start up the front end*
+
+Now lets start up our React app. Use the following command while in the
+`/clients` directory.
+
+```bash
+npm start
+```
+
+🎉 Congradulations! 🎉 Your front should be up and running!
+
+You should now see the following in your browser
+
+![frontend_no_css](./frontend_react.png)
+
+#### *Testing our frontend*
+
+Make sure that our backend is running before we begin testing out frontend.
+http://127.0.0.1:5000
+
+When you click on `Check Backend` you should see the message "Hello from the backend!".
+
+The first form asks for a First Name, Last Name and Age. Input anything you'd
+like. After you press the submit button check the terminal where your Flask
+app is running. You should see `{'message': 'posted data'}` appear in the 
+terminal.
+
+Now lets get data from out back end. There should only be 1 user in our
+database. There id should be 1. Enter 1 in the second form and click submit.
+You should see that users data appear.
+
+# 🎉 Congradulations! 🎉
+
+You have succsesfully set up the project! 😄
