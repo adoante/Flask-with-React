@@ -33,7 +33,7 @@ conda env create -f environment.yml
 Now activate the environment using the following command
 
 ```bash
-conda activate flask-react-sqlalchemy-qai-hub
+conda activate flask-react-sqlalchemy
 ```
 
 ### Setting up the backend
