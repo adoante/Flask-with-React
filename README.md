@@ -17,10 +17,10 @@ and environment manager. Please follow Conda's install instructions.
 
 - [Miniconda Install](https://docs.anaconda.com/miniconda/)
 
-#### *Create the envornment*
+#### *Create the environment*
 
 Located in the project files is a `environment.yml` file. This file
-contains all dependencies and allows you to create an enviornment
+contains all dependencies and allows you to create an environment
 with them all.
 
 First open the miniconda prompt/terminal, navigate to the git directory and use
@@ -33,7 +33,7 @@ conda env create -f environment.yml
 Now activate the environment using the following command
 
 ```bash
-conda activate flask-react-sqlalchemy
+conda activate flask-react-sqlalchemy-qai-hub
 ```
 
 ### Setting up the backend
@@ -44,7 +44,7 @@ Navigate to the `/server` folder. Here you will find two files, `app.py` and `mo
 
 #### *Initializing the database*
 
-Using the minicoda terminal type the following commands in order.
+Using the miniconda terminal type the following commands in order.
 
 ```bash
 flask db init
@@ -72,7 +72,7 @@ Simply run the following command.
 flask run
 ```
 
-🎉 Congradulations! 🎉 Your backend should be up and running!
+🎉 Congratulations! 🎉 Your backend should be up and running!
 
 Check your terminal for HTTP link or follow this link http://127.0.0.1:5000/. The sever should be running on `localhost` on port `5000`. The port number is defined in the `app.py` file and can be changed.
 
@@ -82,7 +82,7 @@ You should be able to see the text "Hello World!" in your browser. Which means
 that flask is running and our `/` endpoint works as well.
 
 Now lets test the endpoint `/api/test`. This endpoint simply returns the
-follwoing JSON
+following JSON
 
 ```JSON
 {
@@ -143,7 +143,7 @@ Now lets start up our React app. Use the following command while in the
 npm start
 ```
 
-🎉 Congradulations! 🎉 Your front should be up and running!
+🎉 Congratulations! 🎉 Your front should be up and running!
 
 You should now see the following in your browser
 
@@ -165,6 +165,6 @@ Now lets get data from out back end. There should only be 1 user in our
 database. There id should be 1. Enter 1 in the second form and click submit.
 You should see that users data appear.
 
-# 🎉 Congradulations! 🎉
+# 🎉 Congratulations! 🎉
 
-You have succsesfully set up the project! 😄
+You have successfully set up the project! 😄
